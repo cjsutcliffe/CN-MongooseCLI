@@ -69,6 +69,19 @@ async function app (yargsInput){
             console.log ("TV Show not deleted...");
         };
 
+    } else if (yargsInput.search) {
+        // code to search
+        console.log("Entering Search");
+        // const results = await MovieCollection.find({title: yargsInput.title});
+        //https://www.mongodb.com/docs/manual/reference/operator/query/regex/
+        //https://www.geeksforgeeks.org/mongodb-regex/
+        const results = await TvCollection.find({[yargsInput.key]:{$regex: yargsInput.filter}})
+        // console.log(results);
+          for (let index = 0; index < results.length; index++) {
+            const element = results[index];
+            console.log(`Found The TV Show "${element.tvshow}" With "${element.tvactor}" Directed by "${element.tvdirector}" Rating ${element.tvrating}`);
+        };
+
     } else {
         console.log("Command not recognised");
     };

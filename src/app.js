@@ -55,6 +55,19 @@ async function app (yargsInput) {
         await deleteMovie(toDelete);
         console.log((toDelete.title)," was deleted sucessfully");
 
+    } else if (yargsInput.search) {
+        // code to search
+        console.log("Entering Search");
+        // const results = await MovieCollection.find({title: yargsInput.title});
+        //https://www.mongodb.com/docs/manual/reference/operator/query/regex/
+        //https://www.geeksforgeeks.org/mongodb-regex/
+        const results = await MovieCollection.find({[yargsInput.key]:{$regex: yargsInput.filter}})
+        // console.log(results);
+          for (let index = 0; index < results.length; index++) {
+            const element = results[index];
+            console.log(`Found The Movie "${element.title}" With "${element.actor}" Directed by "${element.director}" Rating ${element.rating}`);    
+            };
+
     } else {
         console.log("Command not recognised")
     };
