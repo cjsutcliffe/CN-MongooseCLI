@@ -8,7 +8,7 @@ require('./db/connection');
 async function app (yargsInput) {
     if (yargsInput.create) {
         //DONE - code to add movie goes here
-        const movieObject = {title: yargsInput.title, actor: yargsInput.actor, director: yargsInput.director}
+        const movieObject = {title: yargsInput.title, actor: yargsInput.actor, director: yargsInput.director, rating: yargsInput.rating};
         await createMovie(movieObject);
 
     } else if (yargsInput.read) {
@@ -16,12 +16,10 @@ async function app (yargsInput) {
         const results = await MovieCollection.find({}); 
         for (let index = 0; index < results.length; index++) {
         const element = results[index];
-        console.log(`${element.title} With ${element.actor} Directed by ${element.director}`);
-        //console.log(`${element.title} With ${element.actor} Directed by ${element.director} Rating ${element.rating}`);
+        console.log(`${element.title} With ${element.actor} Directed by ${element.director}, Critics Rating:  ${element.rating}`);
         
         //Map method:
         //const mapElements = results.map((element));
-
         };
 
     } else if (yargsInput.updateActor) {
@@ -41,6 +39,15 @@ async function app (yargsInput) {
         // console.log(newDirector);
         await updateDirector (toUpdate, newDirector);
         console.log('Director successfully updated');
+
+    } else if (yargsInput.updateRating) {
+        //DONE - code to update rating goes here
+        const toUpdate = yargsInput.title;
+        const newRating= yargsInput.rating;
+        // console.log(toUpdate);
+        // console.log(newRating);
+        await updateDirector (toUpdate, newRating);
+        console.log('Rating successfully updated');
 
     } else if (yargsInput.delete) {
         //DONE - code to delete a movie goes here

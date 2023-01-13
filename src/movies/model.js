@@ -13,6 +13,10 @@ const movieModel = new mongoose.Schema ({
     director: {
         type: String,
         default: "Director not specified"
+    },
+    rating: {
+        type: Number,
+        default: "0.0"
     }
 });
 
