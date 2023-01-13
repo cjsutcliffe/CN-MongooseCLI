@@ -1,4 +1,5 @@
 const MovieCollection = require('./model');
+const TvCollection = require('./model2')
 
 //create movie - DONE
 async function createMovie(movieObject) {
@@ -20,14 +21,14 @@ async function deleteMovie(toDelete) {
     };
 };
 
-//list movies - not working
-async function listMovies() {
-    try {
-        return await MovieCollection.find({});
-    } catch (error) {
-        console.log(error);
-    };
-};
+// //list movies - DONE
+// async function listMovies() {
+//     try {
+//         return await MovieCollection.find({});
+//     } catch (error) {
+//         console.log(error);
+//     };
+// };
 
 //update actor - DONE
 async function updateActor(title, newActor) {
@@ -47,5 +48,15 @@ async function updateDirector(title, newDirector) {
     };
 };
 
+//create TV show
+async function createTvShow(tvShowObject) {
+    try {
+      const newTvShow = await TvCollection.create(tvShowObject);
+      console.log(newTvShow);
+    } catch (error) {
+      console.log(error);
+    };
+  };
 
-module.exports = {createMovie, deleteMovie, listMovies, updateActor, updateDirector};
+
+module.exports = {createMovie, deleteMovie, updateActor, updateDirector, createTvShow};

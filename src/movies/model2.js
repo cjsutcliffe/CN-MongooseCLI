@@ -1,21 +1,26 @@
+
 const mongoose = require ('mongoose');
 
-const movieModel = new mongoose.Schema ({
-    title: {
+const tvModel = new mongoose.Schema ({
+    tvshow: {
         type: String,
         unique: true,
         required: true
     },
-    actor: {
+    tvactor: {
         type: String,
         default: "Actor not specified"
     },
-    director: {
+    tvdirector: {
         type: String,
         default: "Director not specified"
+    },
+    tvrating: {
+        type: Number,
+        default: "0.0"
     }
 });
 
-const MovieCollection = mongoose.model("Mongoose Movie", movieModel);
+const TvCollection = mongoose.model("Mongoose TV Shows", tvModel);
 
-module.exports = MovieCollection;
+module.exports = TvCollection;

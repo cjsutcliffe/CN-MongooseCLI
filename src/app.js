@@ -1,7 +1,7 @@
 const yargs = require('yargs');
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', true);
-const {createMovie, deleteMovie, listMovies, updateActor, updateDirector } = require ('./movies/function');
+const {createMovie, deleteMovie, updateActor, updateDirector } = require ('./movies/function');
 const MovieCollection = require('./movies/model');
 require('./db/connection');
 
@@ -10,6 +10,7 @@ async function app (yargsInput) {
         //DONE - code to add movie goes here
         const movieObject = {title: yargsInput.title, actor: yargsInput.actor, director: yargsInput.director}
         await createMovie(movieObject);
+
     } else if (yargsInput.read) {
         //code to list all movies goes here - not working
         const results = await MovieCollection.find({}); 
@@ -17,7 +18,12 @@ async function app (yargsInput) {
         const element = results[index];
         console.log(`${element.title} With ${element.actor} Directed by ${element.director}`);
         //console.log(`${element.title} With ${element.actor} Directed by ${element.director} Rating ${element.rating}`);
+        
+        //Map method:
+        //const mapElements = results.map((element));
+
         };
+
     } else if (yargsInput.updateActor) {
         //DONE - code to update actor goes here
         const toUpdate = yargsInput.title;
@@ -26,6 +32,7 @@ async function app (yargsInput) {
         // console.log(newActor);
         await updateActor (toUpdate, newActor);
         console.log('Actor successfully updated');
+
     } else if (yargsInput.updateDirector) {
         //DONE - code to update director goes here
         const toUpdate = yargsInput.title;
@@ -34,11 +41,13 @@ async function app (yargsInput) {
         // console.log(newDirector);
         await updateDirector (toUpdate, newDirector);
         console.log('Director successfully updated');
+
     } else if (yargsInput.delete) {
         //DONE - code to delete a movie goes here
         const toDelete = {title: yargsInput.title}
         await deleteMovie(toDelete);
-        console.log((toDelete.title)," was deleted sucessfully")
+        console.log((toDelete.title)," was deleted sucessfully");
+
     } else {
         console.log("Command not recognised")
     };
